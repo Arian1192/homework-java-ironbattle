@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CharacterInput {
@@ -142,6 +144,19 @@ public class CharacterInput {
     int assignRandomInput(){
         System.out.println("Maximum attempts reached. Assigning random character.");
         return (Utils.generateRandomNumber());
+    }
+
+    //Function
+    public Character characterCreatorInput(){
+        Character character;
+        if (this.getType() == 0){
+            character = new Warrior(this.getName(), this.getHP(),
+                    this.getAttribute1(), this.getAttribute2());
+        } else {
+            character = new Wizard(this.getName(), this.getHP(),
+                    this.getAttribute1(), this.getAttribute2());
+        }
+        return character;
     }
 
     //getters

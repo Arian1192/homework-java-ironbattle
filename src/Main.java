@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         List<Character> characters = getCharacters();
+        printInfoCharacters(characters);
         runBattle(characters);
     }
 
@@ -37,30 +38,46 @@ public class Main {
         List<Character> characters = new ArrayList<>();
         if (option.equals("2")){
             characters = CharacterImporter.importCharactersFromCSV("characters.csv");
-        }else {
+        } else {
             for (int i=0; i<2; i++){
                 if (option.equals("1")){
                     characterInput = new CharacterInput();
                 } else {
                     characterInput = new CharacterInput("random");
                 }
-                if (characterInput.getType() == 0){
-                    characters.add(new Warrior(characterInput.getName(), characterInput.getHP(),
-                            characterInput.getAttribute1(), characterInput.getAttribute2()));
-                } else {
-                    characters.add(new Wizard(characterInput.getName(), characterInput.getHP(),
-                            characterInput.getAttribute1(), characterInput.getAttribute2()));
-                }
+                characters.add(characterInput.characterCreatorInput());
             }
         }
         return characters;
     }
 
-    static void runBattle(List<Character> characters){
+    public static void printInfoCharacters(List<Character> characters){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Our characters are ready. Press Enter to start the battle.");
-        String start = scanner.nextLine();
+        String RESET = "\u001B[0m";
+        String RED = "\u001B[31m";
+        String GREEN = "\u001B[32m";
+
+        System.out.println(GREEN + "Our characters are ready: " + RESET);
+        for (Character character : characters) {
+
+            if (character instanceof Warrior) {
+                System.out.println("Warrior " + character.getName());
+                System.out.println("Health points: " + character.getHp());
+                System.out.println("Stamina: " + ((Warrior) character).getStamina());
+                System.out.println("Strength: " + ((Warrior) character).getStrength() + "\n");
+            } else {
+                System.out.println("Wizard " + character.getName());
+                System.out.println("Health points: " + character.getHp());
+                System.out.println("Mana: " + ((Wizard) character).getMana());
+                System.out.println("Intelligence: " + ((Wizard) character).getIntelligence() + "\n");
+            }
+        }
+        System.out.println(GREEN + "Press Enter to start the battle." + RESET);
+        scanner.nextLine();
+    }
+
+    static void runBattle(List<Character> characters){
         Character firstCharacter = characters.get(0);
         Character secondCharacter = characters.get(1);
 
