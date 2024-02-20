@@ -25,7 +25,7 @@ public class CharacterInput {
     //Setters attributes Random
     public void setAttributesRandom() {
         this.type = Utils.generateRandomNumber();
-        this.name = "Fighter";
+        this.name = "Fighter #" + Utils.generateRandomNumber(1,100);
         this.attribute1 = Utils.generateRandomNumber(10, 50);
         if (this.type == 0){
             this.hp = Utils.generateRandomNumber(100, 200);
@@ -40,7 +40,7 @@ public class CharacterInput {
     public void setTypeInput(){
         Scanner scanner = new Scanner(System.in);
         int attempts = 0;
-        System.out.println("Choose the character: Wizard or Warrior.");
+        System.out.println("Choose the character type: Wizard or Warrior.");
 
         do{
             String charType = scanner.nextLine().toLowerCase();
@@ -49,7 +49,7 @@ public class CharacterInput {
             } else if (charType.equals("wizard")){
                 this.type = 1;
             } else if (attempts < 2){
-                System.out.println("Invalid input. Please enter a valid character(wizard or warrior).");
+                System.out.println("Invalid input. Please enter a valid character type (wizard or warrior).");
             }
         } while (attempts++ < 2 && this.type < 0);
 
@@ -61,34 +61,36 @@ public class CharacterInput {
     public void setNameInput(){
         Scanner scanner = new Scanner(System.in);
         int attempts = 0;
-        if (this.type == 0)
+        if (this.type == 0){
             System.out.println("Let's create a new Warrior!");
-        else
+        } else{
             System.out.println("Let's create a new Wizard!");
-        System.out.println("Write the name of character");
+        }
+        System.out.println("Write the name of character.");
 
         do {
             this.name = scanner.nextLine();
-            if (!this.name.isEmpty()){
+            if (!this.name.isEmpty() && !this.name.replaceAll(" ","").isEmpty()){
                 System.out.println("Let's define " + this.name + "'s attributes.");
                 break ;
             } else if (attempts < 2){
-                System.out.println("Invalid input. Please enter a valid name.");
+                System.out.println("Oops, you must introduce a valid name. Try again!");
             }
         } while (attempts++ < 2);
 
         if (attempts == 3){
-            System.out.println("Maximum attempts reached. Character will be named: Fighter.");
-            this.name = "Fighter";
+            this.name = "Fighter #" + Utils.generateRandomNumber(1,100);
+            System.out.println("Maximum attempts reached. Character will be named: " + this.name);
         }
     }
 
     public void setHP() {
         String attributeName = "Health Points";
-        if (this.type == 0)
+        if (this.type == 0){
             this.hp =  enterAttribute(attributeName, 100, 200);
-        else
+        } else{
             this.hp = enterAttribute(attributeName, 50, 100);
+        }
     }
 
     public void setAttribute1() {
@@ -107,28 +109,28 @@ public class CharacterInput {
         }
     }
 
-    public int enterAttribute(String attributeName, int min, int max) {
+    public int enterAttribute (String attributeName, int min, int max) {
         Scanner scanner = new Scanner(System.in);
         int value = -1;
         int attempts = 0;
 
-        System.out.println("Define " + attributeName + "(range: " + min + " to " + max + "):");
+        System.out.println("Define " + attributeName + " (range: " + min + " to " + max + "):");
         do {
             if (attempts > 0)
-                System.out.println(" Please enter a valid value within the range.");
+                System.out.println("Oops, value is out of range. Try again!");
             String input = scanner.nextLine();
             try{
                 value = Integer.parseInt(input);
                 if (min <= value && value <= max) {
+                    System.out.println("Great! Value for " + attributeName + " assigned to " +  value);
                     break;
-                }
-                else{
+                } else{
                     throw new IndexOutOfBoundsException();
                 }
             } catch (IndexOutOfBoundsException e){
-                System.out.print("Input out of range.");
+                System.out.println("Oops, value is out of range. Try again!");
             } catch (NumberFormatException e) {
-                System.out.print("Invalid input.");
+                System.out.print("Oops, you must introduce an integer number.");
             }
         } while (attempts++ < 2);
 
@@ -137,16 +139,16 @@ public class CharacterInput {
         }
         return (value);
     }
-    int assignRandomInput(int min, int max){
-        System.out.println(" Maximum attempts reached. Assigning random value.");
+
+    public int assignRandomInput(int min, int max){
+        System.out.println(" Sorry, you have exhausted the maximum number of attempts. Assigning random value.");
         return (Utils.generateRandomNumber(min, max));
     }
-    int assignRandomInput(){
-        System.out.println("Maximum attempts reached. Assigning random character.");
+    public int assignRandomInput(){
+        System.out.println("Sorry, you have exhausted the maximum number of attempts. Assigning random character.");
         return (Utils.generateRandomNumber());
     }
 
-    //Function
     public Character characterCreatorInput(){
         Character character;
         if (this.getType() == 0){
