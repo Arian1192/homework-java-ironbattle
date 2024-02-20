@@ -76,7 +76,7 @@ public class Wizard extends Character implements Attacker {
     private void recoverMana(){
         setMana(getMana() + 2);
     }
-
+}
 
 
 
