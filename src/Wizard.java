@@ -77,17 +77,7 @@ public class Wizard extends Character implements Attacker {
         setMana(getMana() + 2);
     }
 
-    public void receiveDamage(int damage){
-        if (getHp() - damage < 0){
-            setHp(0);
-        } else {
-            setHp(getHp() - damage);
-        }
-        if(getHp() <= 0){
-            setAlive(false);
-        }
-    }
-}
+
 
 
 

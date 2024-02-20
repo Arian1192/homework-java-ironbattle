@@ -36,7 +36,6 @@ public class Warrior extends Character implements Attacker {
         return strength;
     }
 
-/// Attack method. Weak and Heavy attacks separate. Attacks are random using Random Util
     @Override
     public void attack(Character character) {
 
@@ -63,12 +62,11 @@ public class Warrior extends Character implements Attacker {
     }
 
     private void heavyAttack(Character character){
-//        System.out.println("Warrior HeavyAttack");
         character.receiveDamage(strength);
         stamina -=5;
     }
     private void weakAttack(Character character){
-        int damage = strength / 2; // can be floated.
+        int damage = strength / 2;
         character.receiveDamage(damage);
         stamina +=1;
     }
@@ -82,16 +80,7 @@ public class Warrior extends Character implements Attacker {
     private void regainStamina(){
         stamina +=2;
     }
-    public void receiveDamage(int damage){
-        if (getHp() - damage < 0){
-            setHp(0);
-        } else {
-            setHp(getHp() - damage);
-        }
-        if(getHp() <= 0){
-            setAlive(false);
-        }
-    }
+
 }
 
 
