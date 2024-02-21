@@ -30,8 +30,6 @@ public class PrintMenus {
                 System.out.println("\tIntelligence: " + ((Wizard) character).getIntelligence() + "\n");
             }
         }
-        System.out.println("Press Enter to start the battle.");
-        scanner.nextLine();
     }
 
 }

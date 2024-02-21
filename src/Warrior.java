@@ -22,7 +22,6 @@ public class Warrior extends Character implements Attacker {
     public void setStrength(int strength) {
         if (strength < 1 || strength > 10) {
             this.strength = -1;
-            System.out.println("Invalid value for strength");
         } else {
             this.strength = strength;
         }
@@ -37,7 +36,6 @@ public class Warrior extends Character implements Attacker {
         return strength;
     }
 
-/// Attack method. Weak and Heavy attacks separate. Attacks are random using Random Util
     @Override
     public void attack(Character character) {
 
@@ -64,14 +62,11 @@ public class Warrior extends Character implements Attacker {
     }
 
     private void heavyAttack(Character character){
-//        System.out.println("Warrior HeavyAttack");
         character.receiveDamage(strength);
         stamina -=5;
     }
     private void weakAttack(Character character){
-//        System.out.println("Warrior weakAttack");
-        int damage = strength / 2; // can be floated.
-        System.out.println("This is the damage " + " " + damage);
+        int damage = strength / 2;
         character.receiveDamage(damage);
         stamina +=1;
     }
@@ -85,6 +80,7 @@ public class Warrior extends Character implements Attacker {
     private void regainStamina(){
         stamina +=2;
     }
+
 }
 
 

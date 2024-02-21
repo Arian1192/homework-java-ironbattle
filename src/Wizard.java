@@ -2,8 +2,8 @@ import java.util.Random;
 
 public class Wizard extends Character implements Attacker {
 
-    private int mana; //random between 10-50
-    private int intelligence; //random between 1-50
+    private int mana;
+    private int intelligence;
 
 
     //Constructor
@@ -25,7 +25,6 @@ public class Wizard extends Character implements Attacker {
     private void setIntelligence(int intelligence) {
         if (intelligence < 1 || intelligence > 50) {
             this.intelligence = -1;
-            // Maybe we can throw IllegalArgumentException({Message}).
         } else {
             this.intelligence = intelligence;
         }
@@ -40,10 +39,10 @@ public class Wizard extends Character implements Attacker {
         return intelligence;
     }
 
-    //Functions
+    //Methods
     @Override
     public void attack(Character character) {
-        int randomNumber = Utils.generateRandomNumber(1,2); // Abstract to an external method
+        int randomNumber = Utils.generateRandomNumber(1,2);
         if (randomNumber == 1 && hasEnoughMana()) {
             fireBallAttack(character);
             Printer.asciiWizardAttack("fireBall");
@@ -56,7 +55,7 @@ public class Wizard extends Character implements Attacker {
     }
 
     private int getRandomNumber() {
-        return new Random().nextInt(2); // Abstract to an external method
+        return new Random().nextInt(2);
     }
 
     private boolean hasEnoughMana() {
@@ -65,13 +64,11 @@ public class Wizard extends Character implements Attacker {
     private boolean hasAlmostOneMana() { return getMana() >= 1;}
 
     private void fireBallAttack(Character character) {
-//        System.out.println("Wizard fireBallAttack");
         setMana(getMana() - 5);
         character.receiveDamage(getIntelligence());
     }
 
     private void staffHitAttack(Character character) {
-//        System.out.println("Wizard staffHitAttack");
         setMana(getMana() + 1);
         character.receiveDamage(2);
     }
@@ -79,8 +76,8 @@ public class Wizard extends Character implements Attacker {
     private void recoverMana(){
         setMana(getMana() + 2);
     }
-
 }
+
 
 
 

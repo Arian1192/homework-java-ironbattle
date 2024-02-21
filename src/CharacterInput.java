@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CharacterInput {
@@ -114,8 +116,8 @@ public class CharacterInput {
 
         System.out.println("Define " + attributeName + " (range: " + min + " to " + max + "):");
         do {
-//            if (attempts > 0)
-//                System.out.println("Oops, value is out of range. Try again!");
+            if (attempts > 0)
+                System.out.println("Oops, value is out of range. Try again!");
             String input = scanner.nextLine();
             try{
                 value = Integer.parseInt(input);
@@ -147,7 +149,6 @@ public class CharacterInput {
         return (Utils.generateRandomNumber());
     }
 
-    //Character creator method
     public Character characterCreatorInput(){
         Character character;
         if (this.getType() == 0){
